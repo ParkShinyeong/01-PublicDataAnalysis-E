@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { HttpErrorType } from '../error/http-error-type';
+import { HttpErrorType } from '../error/httpError.type';
 import { Logger } from '@nestjs/common';
 export class GlobalException extends HttpException {
   constructor(e) {

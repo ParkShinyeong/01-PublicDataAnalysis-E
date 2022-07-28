@@ -4,7 +4,7 @@ import * as helmet from 'helmet';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
-import { AppModule } from './resources/app/app.module';
+import { AppModule } from './app.module';
 import { SwaggerConfig } from './config';
 import { HttpExceptionFilter } from './http';
 
@@ -26,7 +26,7 @@ async function bootstrap() {
   app.use('/public', express.static(path.join(__dirname, '../public')));
 
   SwaggerConfig(app, AppModule.apiVersion);
-  
+
   await app.listen(AppModule.port);
   return AppModule.port;
 }

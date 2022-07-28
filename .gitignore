@@ -7,6 +7,7 @@
 node_modules/
 dist/
 #yarn.lock
+#env/.env
 
 # Compiled Java class files
 *.class
@@ -56,3 +57,5 @@ Thumbs.db
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+.env

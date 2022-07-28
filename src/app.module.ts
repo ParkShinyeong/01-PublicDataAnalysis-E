@@ -1,16 +1,17 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { join } from 'path';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { LoggerMiddleware } from '../../loggermiddleware';
+import { AppController } from './resources/app/app.controller';
+import { AppService } from './resources/app/app.service';
+
+import { LoggerMiddleware } from './loggermiddleware';
+import { PublicApiController } from './resources/publicApi/publicApi.controller';
+import { PublicApiService } from './resources/publicApi/publicApi.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `env/${process.env.NODE_ENV}.env`
+      envFilePath: [`env/development.env`, `env/.env`],
     }),
     // TypeOrmModule.forRootAsync({
     //   imports: [ConfigModule],
@@ -34,10 +35,8 @@ import { LoggerMiddleware } from '../../loggermiddleware';
     // TypeOrmModule.forFeature([]),
     AppModule,
   ],
-  controllers: [AppController],
-  providers: [
-    AppService
-  ],
+  controllers: [PublicApiController, AppController],
+  providers: [PublicApiService, AppService],
 })
 export class AppModule implements NestModule {
   static port: number;
